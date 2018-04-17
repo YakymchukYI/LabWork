@@ -7,15 +7,15 @@ int main()
 {
 	const int ROWS = 5, COLS = 6;
 	int M[ROWS][COLS], elem = 0;
-	for (int i = 0; i < ROWS; ++i) {
-		for (int j = 0; j < COLS; ++j) {
-			M[i][j] = elem;
+	for (int i = 0; i < COLS; ++i) {
+		for (int j = 0; j < ROWS; ++j) {
+			M[j][i] = elem;
 			++elem;
 		}
 	}
 	for (int i = 0; i < ROWS; ++i) {
 		for (int j = 0; j < COLS; ++j) {
-			cout << M[j][i] << "\t";
+			cout << M[i][j] << "\t";
 		}
 		cout << endl;
 	}
