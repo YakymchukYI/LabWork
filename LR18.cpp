@@ -9,7 +9,7 @@ template<typename Type> void printArr(Type A[], int SIZE);
 template<typename Type> void mixingArrEl(Type A[], int SIZE);
 template<typename Type> void sortBubble(Type A[], int SIZE);
 
-#define factorial(num,res) res = 1;\
+#define factorial(num,res) res = 1;\//Macros
 for (int i = 1; i<=num; ++i)\
 	res *=i;
 
@@ -41,18 +41,18 @@ int main()
 }
 
 
-template<typename Type> void inputArr (Type A[], int SIZE) {
+template<typename Type> void inputArr (Type A[], int SIZE) {//Filing array
 	for (int i = 0; i < SIZE; ++i) {
 		cout << "Enter " << i << " array element > "; cin >> A[i];
 	}
 }
-template<typename Type> void printArr (Type A[], int SIZE) {
+template<typename Type> void printArr (Type A[], int SIZE) {//Print array
 	for (int i = 0; i < SIZE; ++i) {
 		cout << A[i] << " ";
 	}
 	cout << endl;
 }
-template<typename Type> void mixingArrEl (Type A[], int SIZE) {
+template<typename Type> void mixingArrEl (Type A[], int SIZE) {//Mixing element in array
 	Type tmp;
 	int num1 = 0, num2 = 0;
 	for (int i = 0; i < SIZE; ++i) {
@@ -63,7 +63,7 @@ template<typename Type> void mixingArrEl (Type A[], int SIZE) {
 		A[num2] = tmp;
 	}
 }
-template<typename Type> void sortBubble (Type A[], int SIZE) {
+template<typename Type> void sortBubble (Type A[], int SIZE) {//Sort bubble
 	for (int step = 0; step < SIZE - 1; ++step) {
 		for (int i = SIZE - 1; i > step; --i) {
 			if (A[i] < A[i - 1]) {
