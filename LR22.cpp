@@ -6,8 +6,8 @@ int *Create(int &);
 void Print(const int *, int &);
 int *Fill(int *, int &, int &, int &);
 int* Add(int *, int &, int);
-int* AddPosition(int*, int&, int, int);
-int* DelPosition(int*, int&, int);
+void AddPosition(int*&, int&, int, int);
+void DelPosition(int*&, int&, int);
 
 int main() {
 	srand(unsigned(time(0)));
@@ -34,7 +34,7 @@ int main() {
 	delete[]A;
 	A = nullptr;*/
 
-	int size, *A, lm, rm, el, key;
+	/*int size, *A, lm, rm, el, key;
 	cout << "Vvedit' rozmir masivu > ";
 	cin >> size;
 	A = Create(size);
@@ -48,12 +48,35 @@ int main() {
 	Print(A, size);
 	cout << "Vvedit' element yakiy hochete dodaty > "; cin >> el;
 	cout << "Vvedit' poziciyu yaku dodaty > "; cin >> key;
-	A = AddPosition(A, size, el, key);
+	AddPosition(A, size, el, key);
 	Print(A, size);
 	cout << "Vvedit' poziciyu yaku vidalyty > "; cin >> key;
 	A = DelPosition(A, size, key);
-	Print(A, size);
+	Print(A, size);*/
 
+	int size = 20, *A, lm = -12, rm = 56;
+	A = Create(size);
+	Fill(A, size, lm, rm);
+	cout << "\t\t\t\Start array!!!\n";
+	Print(A, size);
+	for (int i = 0; i < size; ++i) {
+		if (A[i] < 0) {
+			AddPosition(A, size, abs(A[i]), i+1);
+			++i;
+		}
+	}
+	cout << "\n\t\t\tAdd abs to array!!!\n";
+	Print(A, size);
+	for (int i = 0; i < size; ++i) {
+		if (A[i] % 2 == 0 && A[i] != 0) {
+			DelPosition(A, size, i+1);
+			--i;
+		}
+		
+	}
+	cout << "\n\t\t\tDelete all binate elements!!!\n";
+	Print(A, size);
+	
 	system("pause");
 	return 0;
 }
@@ -69,8 +92,7 @@ int *Fill(int *A, int &size, int & lm, int & rm) {
 		lm = tmp;
 	}
 	for (int i = 0; i < size; ++i) {
-		int a = rm - lm + 1;
-		A[i] = rand() % a + lm;
+		A[i] = lm + rand() % rm;
 	}return A;
 }
 void Print(const int *A, int &size) {
@@ -94,26 +116,31 @@ int* Add(int*A, int &size, int el) {
 	delete[]A;
 	return B;
 }
-int* AddPosition(int*A, int&size, int el, int key) {
+void AddPosition(int*&A, int&size, int el, int key) {
 	int *B = new int[++size];
-	for (int i = 0; i < key; ++i) {
-		B[i] = A[i];
-	}
-	for (int i = key; i < size; ++i) {
-		B[i + 1] = A[i];
+	for (int i = 0; i < size; ++i) {
+		if (i >= key) {
+			B[i + 1] = A[i];
+		}
+		else {
+			B[i] = A[i];
+		}
 	}
 	B[key] = el;
 	delete[]A;
-	return B;
+	A = B;
 }
-int* DelPosition(int*A, int&size, int key) {
-	int *B = new int[--size];
-	for (int i = 0; i < key; ++i) {
-		B[i] = A[i];
+void DelPosition(int*&A, int&size, int key) {
+	int *B = new int[size - 1];
+	for (int i = 0; i < size; ++i) {
+		if (i >= key) {
+			B[i - 1] = A[i];
+		}
+		else {
+			B[i] = A[i];
+		}
 	}
-	for (int i = key; i < size; ++i) {
-		B[i] = A[i + 1];
-	}
+	--size;
 	delete[]A;
-	return B;
+	A = B;
 }
